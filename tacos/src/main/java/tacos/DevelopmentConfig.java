@@ -9,7 +9,7 @@ import tacos.dao.IngredientRepository;
 import java.util.Arrays;
 import java.util.List;
 
-@Profile({"!prod"})
+@Profile({"prod"})
 @Configuration
 public class DevelopmentConfig {
 
