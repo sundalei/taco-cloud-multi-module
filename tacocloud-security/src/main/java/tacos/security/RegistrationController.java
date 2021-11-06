@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
-import tacos.dao.UserRepository;
+import tacos.data.UserRepository;
 
 @Slf4j
 @Controller
@@ -31,7 +31,6 @@ public class RegistrationController {
 
     @PostMapping
     public String processRegistration(RegistrationForm form) {
-        log.info(form.toString());
         userRepo.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }

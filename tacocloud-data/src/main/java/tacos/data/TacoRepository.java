@@ -1,4 +1,4 @@
-package tacos.dao;
+package tacos.data;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import tacos.Taco;

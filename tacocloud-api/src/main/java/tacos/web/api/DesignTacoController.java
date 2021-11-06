@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tacos.Taco;
-import tacos.dao.TacoRepository;
+import tacos.data.TacoRepository;
 
 import java.util.Optional;
 
@@ -45,8 +45,6 @@ public class DesignTacoController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Taco postTaco(@RequestBody Taco taco) {
-        log.info("----------------------");
-        log.info(taco.toString());
         return tacoRepo.save(taco);
     }
 }

@@ -1,4 +1,4 @@
-package tacos.dao;
+package tacos.data;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
