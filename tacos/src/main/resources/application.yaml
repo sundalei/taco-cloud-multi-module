@@ -24,6 +24,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  data:
+    rest:
+      base-path: /myapi
 
 logging:
   level:
