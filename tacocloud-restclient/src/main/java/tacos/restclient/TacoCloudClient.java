@@ -2,7 +2,9 @@ package tacos.restclient;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.client.Traverson;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,6 +13,7 @@ import tacos.Ingredient;
 
 import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -38,5 +41,15 @@ public class TacoCloudClient {
         log.info(responseEntity.getHeaders().toString());
 
         return responseEntity.getBody();
+    }
+
+    public List<Ingredient> getAllIngredients() {
+        return rest.exchange("http://localhost:8080/ingredients",
+                HttpMethod.GET, null, new ParameterizedTypeReference<List<Ingredient>>() {})
+                .getBody();
+    }
+
+    public void updateIngredient(Ingredient ingredient) {
+        rest.put("http://localhost:8080/ingredients/{id}", ingredient, ingredient.getId());
     }
 }

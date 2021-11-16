@@ -9,8 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.client.Traverson;
 import org.springframework.web.client.RestTemplate;
+import tacos.Ingredient;
 
 import java.net.URI;
+import java.util.List;
 
 @SpringBootConfiguration
 @ComponentScan
@@ -38,6 +40,18 @@ public class RestExamples {
             log.info("----------------------- GET -------------------------");
             log.info("GETTING INGREDIENT BY IDE");
             log.info("Ingredient:  " + tacoCloudClient.getIngredientById("CHED"));
+            log.info("GETTING ALL INGREDIENTS");
+            List<Ingredient> ingredients = tacoCloudClient.getAllIngredients();
+            for (Ingredient ingredient : ingredients) {
+                log.info("   -  " + ingredient);
+            }
+        };
+    }
+
+    @Bean
+    public CommandLineRunner putAnIngredient(TacoCloudClient tacoCloudClient) {
+        return args -> {
+
         };
     }
 }
