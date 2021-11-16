@@ -9,10 +9,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>tacocloud-api</artifactId>
+    <artifactId>tacocloud-restclient</artifactId>
     <packaging>jar</packaging>
-    <name>tacocloud-api</name>
-    <description>Taco Cloud API</description>
+    <name>tacocloud-restclient</name>
+    <description>Taco Cloud Rest Client</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>sia</groupId>
-            <artifactId>tacocloud-data</artifactId>
+            <artifactId>tacocloud-domain</artifactId>
             <version>${tacocloud.version}</version>
         </dependency>
 
@@ -38,6 +38,11 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
         </dependency>
 
         <dependency>

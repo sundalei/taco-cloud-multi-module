@@ -8,7 +8,6 @@ import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.hateoas.server.RepresentationModelProcessor;
 import tacos.Taco;
 
-// https://www.796t.com/post/OGRpdHc=.html
 @Configuration
 public class SpringDataRestConfiguration {
 
