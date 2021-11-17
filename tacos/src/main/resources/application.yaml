@@ -28,10 +28,6 @@ spring:
     rest:
       base-path: /myapi
 
-logging:
-  level:
-    tacos: warn
-
 ---
 spring:
   datasource:
