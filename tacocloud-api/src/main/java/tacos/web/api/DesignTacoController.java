@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/api/design", produces = "application/json")
+@RequestMapping(path = "/design", produces = "application/json")
 @CrossOrigin(origins = "*")
 @Slf4j
 public class DesignTacoController {

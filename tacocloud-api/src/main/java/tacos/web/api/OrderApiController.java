@@ -10,7 +10,7 @@ import tacos.data.OrderRepository;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/api/orders", produces = "application/json")
+@RequestMapping(path = "/orders", produces = "application/json")
 @CrossOrigin(origins = "*")
 public class OrderApiController {
 
