@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import tacos.Ingredient;
 
 import java.net.URI;
-import java.util.List;
 
 @SpringBootConfiguration
 @ComponentScan
@@ -51,6 +50,7 @@ public class RestExamples {
     */
 
 
+    /*
     @Bean
     public CommandLineRunner putAnIngredient(TacoCloudClient tacoCloudClient) {
         return args -> {
@@ -58,9 +58,18 @@ public class RestExamples {
             Ingredient before = tacoCloudClient.getIngredientById("LETC");
             log.info("BEFORE: " + before);
             tacoCloudClient.updateIngredient(
-                    new Ingredient("LETC", "Shredded Lettuce", Ingredient.Type.VEGGIES));
-            Ingredient after = tacoCloudClient.getIngredientById("LETC");
+                    new Ingredient("LETD", "Shredded Lettuce", Ingredient.Type.VEGGIES));
+            Ingredient after = tacoCloudClient.getIngredientById("LETD");
             log.info("AFTER: " + after);
+        };
+    }
+     */
+
+    @Bean
+    public CommandLineRunner deleteAnIngredient(TacoCloudClient tacoCloudClient) {
+        return args -> {
+            log.info("delete an ingredient");
+            tacoCloudClient.deleteAnIngredient("FLTO");
         };
     }
 }

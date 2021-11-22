@@ -47,4 +47,10 @@ public class IngredientController {
 
         return updatedIngredient;
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteIngredient(@PathVariable String id) {
+
+        ingredientRepo.findById(id).ifPresent(ingredient -> ingredientRepo.deleteById(id));
+    }
 }
