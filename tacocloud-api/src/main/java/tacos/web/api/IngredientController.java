@@ -35,8 +35,8 @@ public class IngredientController {
 
     @PutMapping("/{id}")
     public Ingredient updateIngredient(@PathVariable("id") String id, @RequestBody Ingredient ingredient) {
-        
-        Ingredient updatedIngredient = ingredientRepo.findById(id).map(oldIngredient -> {
+
+        return ingredientRepo.findById(id).map(oldIngredient -> {
             oldIngredient.setName(ingredient.getName());
             oldIngredient.setType(ingredient.getType());
             return ingredientRepo.save(oldIngredient);
@@ -44,13 +44,17 @@ public class IngredientController {
             ingredient.setId(id);
             return ingredientRepo.save(ingredient);
         });
-
-        return updatedIngredient;
     }
 
     @DeleteMapping("/{id}")
     public void deleteIngredient(@PathVariable String id) {
 
         ingredientRepo.findById(id).ifPresent(ingredient -> ingredientRepo.deleteById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> newIngredient(@RequestBody Ingredient newIngredient) {
+
+        return ResponseEntity.ok().body(ingredientRepo.save(newIngredient));
     }
 }
