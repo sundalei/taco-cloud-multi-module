@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import tacos.Ingredient;
+import tacos.Taco;
 
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -90,5 +91,19 @@ public class TacoCloudClient {
         Collection<Ingredient> ingredients = ingredientRes.getContent();
         log.info("ingredients");
         ingredients.forEach(ingredient -> log.info(ingredient.toString()));
+    }
+
+    public void recentTacos() {
+
+        ParameterizedTypeReference<CollectionModel<Taco>> tacoType =
+                new ParameterizedTypeReference<>() {};
+
+        CollectionModel<Taco> tacoRes =
+                traverson
+                        .follow("tacos")
+                        .follow("recents")
+                        .toObject(tacoType);
+        Collection<Taco> tacos = tacoRes.getContent();
+        tacos.forEach(taco -> log.info(taco.toString()));
     }
 }

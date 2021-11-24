@@ -29,7 +29,9 @@ public class RestExamples {
 
     @Bean
     public Traverson traverson() {
-        Traverson traverson = new Traverson(URI.create("http://localhost:8080/myapi"), MediaTypes.HAL_JSON);
+        Traverson traverson =
+                new Traverson(URI.create("http://localhost:8080/myapi"),
+                        MediaTypes.HAL_JSON, MediaTypes.COLLECTION_JSON);
         return traverson;
     }
 
@@ -90,11 +92,22 @@ public class RestExamples {
 
      */
 
+    /*
     @Bean
     public CommandLineRunner listIngredients(TacoCloudClient tacoCloudClient) {
         return args -> {
             log.info("list ingredients");
             tacoCloudClient.listIngredients();
+        };
+    }
+
+     */
+
+    @Bean
+    public CommandLineRunner recentTacos(TacoCloudClient tacoCloudClient) {
+        return args -> {
+            log.info("recent tacos");
+            tacoCloudClient.recentTacos();
         };
     }
 }
