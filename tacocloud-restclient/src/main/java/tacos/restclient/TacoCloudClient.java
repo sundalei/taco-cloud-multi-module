@@ -13,7 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import tacos.Ingredient;
 import tacos.Taco;
 
-import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.Collection;
 import java.util.HashMap;

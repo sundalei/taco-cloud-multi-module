@@ -15,6 +15,8 @@ import javax.persistence.PrePersist;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 @Data
 @Entity
 @RestResource(rel = "tacos", path = "tacos")
@@ -33,6 +35,7 @@ public class Taco {
     @ManyToMany(targetEntity = Ingredient.class)
     @NotNull(message = "You must choose at least 1 ingredient")
     @Size(min = 1, message = "You must choose at least 1 ingredient")
+    @JsonDeserialize(using = CustomStringDeserializer.class)
     private List<Ingredient> ingredients;
 
     @PrePersist
