@@ -13,6 +13,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import tacos.Order;
 import tacos.User;
 import tacos.data.OrderRepository;
+import tacos.messaging.OrderMessagingService;
 
 import javax.validation.Valid;
 
@@ -26,10 +27,14 @@ public class OrderController {
 
     private final OrderProps props;
 
+    private final OrderMessagingService messagingService;
+
     @Autowired
     public OrderController(OrderRepository orderRepo,
+                           OrderMessagingService messagingService,
                            OrderProps props) {
         this.orderRepo = orderRepo;
+        this.messagingService = messagingService;
         this.props = props;
     }
 
@@ -70,6 +75,8 @@ public class OrderController {
         order.setUser(user);
 
         orderRepo.save(order);
+        messagingService.sendOrder(order);
+
         sessionStatus.setComplete();
 
         return "redirect:/";

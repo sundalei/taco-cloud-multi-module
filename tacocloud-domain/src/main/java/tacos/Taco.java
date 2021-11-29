@@ -1,5 +1,6 @@
 package tacos;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @Data
 @Entity
 @RestResource(rel = "tacos", path = "tacos")
-public class Taco {
+public class Taco implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

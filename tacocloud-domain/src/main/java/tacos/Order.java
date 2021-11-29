@@ -3,6 +3,7 @@ package tacos;
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import javax.validation.constraints.Pattern;
 @Data
 @Entity
 @Table(name = "Taco_Order")
-public class Order {
+public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

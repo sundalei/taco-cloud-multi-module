@@ -3,13 +3,11 @@ package tacos;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import tacos.data.IngredientRepository;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Profile({"prod"})
 @Configuration
 public class DevelopmentConfig {
 

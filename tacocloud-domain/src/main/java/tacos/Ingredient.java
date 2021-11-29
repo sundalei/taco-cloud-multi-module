@@ -4,10 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Ingredient {
+public class Ingredient implements Serializable {
 
     @Id
     private String id;
