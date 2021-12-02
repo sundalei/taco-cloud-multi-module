@@ -2,6 +2,7 @@ package tacos.messaging;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessagePostProcessor;
 import org.springframework.stereotype.Service;
 import tacos.Order;
 
@@ -23,6 +24,9 @@ public class JmsOrderMessagingService implements OrderMessagingService {
     @Override
     public void sendOrder(Order order) {
         //jms.send(orderQueue, session -> session.createObjectMessage(order));
-        jms.convertAndSend(orderQueue, order);
+        jms.convertAndSend(orderQueue, order, (MessagePostProcessor) message -> {
+            message.setStringProperty("X_ORDER_SOURCE", "WEB");
+            return message;
+        });
     }
 }
