@@ -36,6 +36,13 @@ spring:
     template:
       default-destination: tacocloud.order.queue
 
+  artemis:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    embedded:
+      enabled: false
+
 ---
 spring:
   datasource:

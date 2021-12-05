@@ -9,10 +9,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>tacocloud-kitchen</artifactId>
+    <artifactId>tacocloud-messaging-rabbitmq</artifactId>
     <packaging>jar</packaging>
-    <name>tacocloud-kitchen</name>
-    <description>Taco Cloud Kitchen</description>
+    <name>tacocloud-messaging-rabbitmq</name>
+    <description>Taco Cloud Messaging Rabbitmq</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,30 +23,14 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-artemis</artifactId>
+            <groupId>sia</groupId>
+            <artifactId>tacocloud-domain</artifactId>
+            <version>${tacocloud.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
 
     </dependencies>

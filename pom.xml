@@ -33,6 +33,7 @@
         <module>tacocloud-restclient</module>
         <module>tacocloud-messaging-jms</module>
         <module>tacocloud-kitchen</module>
+        <module>tacocloud-messaging-rabbitmq</module>
     </modules>
 
 </project>
