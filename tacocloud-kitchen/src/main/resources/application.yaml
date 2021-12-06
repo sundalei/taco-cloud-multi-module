@@ -21,4 +21,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: rabbitmq-template
+      on-profile: rabbitmq-template, rabbitmq-listener
+  rabbitmq:
+    template:
+      receive-timeout: 30000
