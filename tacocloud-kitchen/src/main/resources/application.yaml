@@ -25,3 +25,15 @@ spring:
   rabbitmq:
     template:
       receive-timeout: 30000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: kafka-listener
+
+  kafka:
+    bootstrap-servers:
+    - localhost:9092
+    template:
+      default-topic: tacocloud.orders.topic

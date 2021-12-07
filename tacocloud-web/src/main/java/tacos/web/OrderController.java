@@ -71,6 +71,7 @@ public class OrderController {
 
         log.info("Order submitted: " + order);
         log.info("user info: " + user);
+        log.info("message service: " + messagingService.getClass().getSimpleName());
 
         order.setUser(user);
 
