@@ -43,6 +43,15 @@ spring:
     embedded:
       enabled: false
 
+  kafka:
+    bootstrap-servers:
+    - localhost:9092
+    template:
+      default-topic: tacocloud.orders.topic
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 ---
 spring:
   datasource:
