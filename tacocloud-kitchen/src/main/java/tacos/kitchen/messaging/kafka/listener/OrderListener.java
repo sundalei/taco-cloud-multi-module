@@ -1,5 +1,6 @@
 package tacos.kitchen.messaging.kafka.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -10,9 +11,10 @@ import tacos.kitchen.KitchenUI;
 
 @Profile("kafka-listener")
 @Component
+@Slf4j
 public class OrderListener {
 
-    private KitchenUI ui;
+    private final KitchenUI ui;
 
     @Autowired
     public OrderListener(KitchenUI ui) {
@@ -20,7 +22,9 @@ public class OrderListener {
     }
 
     @KafkaListener(topics = "tacocloud.orders.topic")
-    public void handle(Order order) {
+    public void handle(Order order, ConsumerRecord<String, Order> record) {
+        log.info("Received from partition {} with timestamp {}",
+                record.partition(), record.timestamp());
         ui.displayOrder(order);
     }
 }
