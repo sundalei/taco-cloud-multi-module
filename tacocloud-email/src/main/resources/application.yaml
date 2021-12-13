@@ -1,0 +1,7 @@
+tacocloud:
+  email:
+    host: imap.tacocloud.com
+    mailbox: INBOX
+    password: test
+    username: test
+    poll-rate: 10000
