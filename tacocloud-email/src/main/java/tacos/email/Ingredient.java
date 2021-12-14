@@ -1,7 +1,5 @@
 package tacos.email;
 
-import javax.swing.plaf.TreeUI;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
