@@ -23,7 +23,12 @@
     {
       "name": "tacocloud.email.password",
       "type": "java.lang.String",
-      "description": "Description for tacocloud.password."
+      "description": "Description for tacocloud.email.password."
+    },
+    {
+      "name": "tacocloud.email.port",
+      "type": "java.lang.String",
+      "description": "Description for tacocloud.email.port."
     }
   ]
 }

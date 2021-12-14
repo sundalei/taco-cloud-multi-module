@@ -1,7 +1,8 @@
 tacocloud:
   email:
-    host: imap.tacocloud.com
+    host: imap.google.com
+    port: 993
     mailbox: INBOX
-    password: test
-    username: test
+    password: oarnud9I
+    username: sundalei1988
     poll-rate: 10000
