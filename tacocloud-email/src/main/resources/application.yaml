@@ -6,3 +6,8 @@ tacocloud:
     password: oarnud9I
     username: sundalei1988
     poll-rate: 10000
+  api:
+    url: http://localhost:8080/api/orders
+spring:
+  main:
+    web-application-type: none

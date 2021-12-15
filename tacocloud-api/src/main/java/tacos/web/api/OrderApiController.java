@@ -29,6 +29,7 @@ public class OrderApiController {
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Order postOrder(@RequestBody Order order) {
+        log.info("post order:" + order.toString());
         return orderRepo.save(order);
     }
 

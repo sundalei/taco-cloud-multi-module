@@ -29,6 +29,11 @@
       "name": "tacocloud.email.port",
       "type": "java.lang.String",
       "description": "Description for tacocloud.email.port."
+    },
+    {
+      "name": "tacocloud.api.url",
+      "type": "java.lang.String",
+      "description": "Description for tacocloud.api.url."
     }
   ]
 }

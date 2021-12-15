@@ -18,8 +18,9 @@ public class TacoOrderEmailIntegrationConfig {
 
         return IntegrationFlows
                 .from(Mail.imapInboundAdapter(emailProperties.getImapUrl()),
-                        e -> e.poller(
-                                Pollers.fixedDelay(emailProperties.getPollRate())))
+                        sourcePollingChannelAdapterSpec ->
+                                sourcePollingChannelAdapterSpec.poller(
+                                        Pollers.fixedDelay(emailProperties.getPollRate())))
                 .transform(emailToOrderTransformer)
                 .handle(orderSubmitMessageHandler)
                 .get();
