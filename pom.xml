@@ -36,6 +36,7 @@
         <module>tacocloud-messaging-rabbitmq</module>
         <module>tacocloud-messaging-kafka</module>
         <module>tacocloud-email</module>
+        <module>tacocloud-mongodb</module>
     </modules>
 
 </project>
