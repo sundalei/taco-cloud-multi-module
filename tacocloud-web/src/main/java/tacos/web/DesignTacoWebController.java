@@ -37,7 +37,7 @@ public class DesignTacoWebController {
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
-        ingredientRepo.findAll().forEach(ingredients::add);
+        ingredientRepo.findAll().subscribe(ingredients::add);
 
         Type[] types = Ingredient.Type.values();
         for (Type type : types) {
@@ -69,7 +69,7 @@ public class DesignTacoWebController {
         }
 
         log.info("Processing design: " + design);
-        Taco saved = designRepo.save(design);
+        Taco saved = designRepo.save(design).block();
         order.addDesign(saved);
 
         return "redirect:/orders/current";

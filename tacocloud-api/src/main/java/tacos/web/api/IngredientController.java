@@ -1,13 +1,16 @@
 package tacos.web.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import tacos.Ingredient;
 import tacos.data.IngredientRepository;
 
-import java.util.Optional;
+import java.net.URI;
 
 @RestController
 @RequestMapping(path = "/ingredients", produces = "application/json")
@@ -22,39 +25,36 @@ public class IngredientController {
     }
 
     @GetMapping
-    public Iterable<Ingredient> allIngredients() {
+    public Flux<Ingredient> allIngredients() {
         return ingredientRepo.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Ingredient> getIngredientById(@PathVariable("id") String id) {
-        Optional<Ingredient> optional = ingredientRepo.findById(id);
-        return optional.map(ingredient -> new ResponseEntity<>(ingredient, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    public Mono<Ingredient> getIngredientById(@PathVariable("id") String id) {
+        return ingredientRepo.findById(id);
     }
 
     @PutMapping("/{id}")
-    public Ingredient updateIngredient(@PathVariable("id") String id, @RequestBody Ingredient ingredient) {
-
-        return ingredientRepo.findById(id).map(oldIngredient -> {
-            oldIngredient.setName(ingredient.getName());
-            oldIngredient.setType(ingredient.getType());
-            return ingredientRepo.save(oldIngredient);
-        }).orElseGet(() -> {
-            ingredient.setId(id);
-            return ingredientRepo.save(ingredient);
-        });
+    public void updateIngredient(@PathVariable("id") String id, @RequestBody Ingredient ingredient) {
+        if (!ingredient.getId().equals(id)) {
+            throw new IllegalStateException("Given ingredient's ID doesn't match the ID in the path.");
+        }
+        ingredientRepo.save(ingredient);
     }
 
     @DeleteMapping("/{id}")
     public void deleteIngredient(@PathVariable String id) {
-
-        ingredientRepo.findById(id).ifPresent(ingredient -> ingredientRepo.deleteById(id));
+        ingredientRepo.deleteById(id);
     }
 
     @PostMapping
-    public ResponseEntity<?> newIngredient(@RequestBody Ingredient newIngredient) {
-
-        return ResponseEntity.ok().body(ingredientRepo.save(newIngredient));
+    public Mono<ResponseEntity<Ingredient>> newIngredient(@RequestBody Mono<Ingredient> newIngredient) {
+        return newIngredient
+                .flatMap(ingredientRepo::save)
+                .map(ingredient -> {
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setLocation(URI.create("http://localhost:8080/ingredients/" + ingredient.getId()));
+                    return new ResponseEntity<>(ingredient, headers, HttpStatus.CREATED);
+                });
     }
 }

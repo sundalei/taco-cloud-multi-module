@@ -76,7 +76,7 @@ public class OrderController {
         order.setUser(user);
 
         orderRepo.save(order);
-        messagingService.sendOrder(order);
+        //messagingService.sendOrder(order);
 
         sessionStatus.setComplete();
 
