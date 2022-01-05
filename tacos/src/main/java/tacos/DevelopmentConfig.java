@@ -5,29 +5,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tacos.data.IngredientRepository;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 public class DevelopmentConfig {
 
     @Bean
     public CommandLineRunner dataLoader(IngredientRepository repo) {
-        return (args) -> {
+        return new CommandLineRunner() {
+            @Override
+            public void run(String... args) throws Exception {
+                Ingredient flourTortilla = saveAnIngredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP);
+                Ingredient cornTortilla = saveAnIngredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP);
+                Ingredient groundBeef = saveAnIngredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN);
+                Ingredient carnitas = saveAnIngredient("CARN", "Carnitas", Ingredient.Type.PROTEIN);
+                Ingredient tomatoes = saveAnIngredient("TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES);
+                Ingredient lettuce = saveAnIngredient("LETC", "Lettuce", Ingredient.Type.VEGGIES);
+                Ingredient cheddar = saveAnIngredient("CHED", "Cheddar", Ingredient.Type.CHEESE);
+                Ingredient jack = saveAnIngredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE);
+                Ingredient salsa = saveAnIngredient("SLSA", "Salsa", Ingredient.Type.SAUCE);
+                Ingredient sourCream = saveAnIngredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE);
 
-            List<Ingredient> ingredients = Arrays.asList(
-                    new Ingredient("FLTO", "Flour Tortilla", Ingredient.Type.WRAP),
-                    new Ingredient("COTO", "Corn Tortilla", Ingredient.Type.WRAP),
-                    new Ingredient("GRBF", "Ground Beef", Ingredient.Type.PROTEIN),
-                    new Ingredient("CARN", "Carnitas", Ingredient.Type.PROTEIN),
-                    new Ingredient("TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES),
-                    new Ingredient("LETC", "Lettuce", Ingredient.Type.VEGGIES),
-                    new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE),
-                    new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE),
-                    new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE),
-                    new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
+            }
 
-            repo.saveAll(ingredients);
+            private Ingredient saveAnIngredient(String id, String name, Ingredient.Type type) {
+                Ingredient ingredient = new Ingredient(id, name, type);
+                repo.save(ingredient).subscribe();
+                return ingredient;
+            }
         };
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import tacos.Order;
 import tacos.data.OrderRepository;
 
@@ -22,27 +24,27 @@ public class OrderApiController {
     }
 
     @GetMapping(produces = "application/json")
-    public Iterable<Order> allOrders() {
+    public Flux<Order> allOrders() {
         return orderRepo.findAll();
     }
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public Order postOrder(@RequestBody Order order) {
+    public Mono<Order> postOrder(@RequestBody Order order) {
         log.info("post order:" + order.toString());
         return orderRepo.save(order);
     }
 
     @PutMapping(path = "/{orderId}", consumes = "application/json")
-    public Order putOrder(@RequestBody Order order) {
+    public Mono<Order> putOrder(@RequestBody Order order) {
         return orderRepo.save(order);
     }
 
     @PatchMapping(path = "/{orderId}", consumes = "application/json")
-    public Order patchOrder(@PathVariable("orderId") Long orderId,
-                            @RequestBody Order patch) {
+    public Mono<Order> patchOrder(@PathVariable("orderId") String orderId,
+                                  @RequestBody Order patch) {
 
-        Order order = orderRepo.findById(orderId).get();
+        Order order = orderRepo.findById(orderId).block();
         if (patch.getDeliveryName() != null) {
             order.setDeliveryName(patch.getDeliveryName());
         }
@@ -72,7 +74,7 @@ public class OrderApiController {
 
     @DeleteMapping("/{orderId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable("orderId") Long orderId) {
+    public void deleteOrder(@PathVariable("orderId") String orderId) {
         try {
             orderRepo.deleteById(orderId);
         } catch (EmptyResultDataAccessException e) {
